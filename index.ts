@@ -4,8 +4,9 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
 import dotenv from "dotenv";
-import clerkRouter from "./routes/clerk.router.js"
-import testRouter from './routes/test.router.js'
+import clerkRouter from "./routes/clerk.router.ts"
+import testRouter from './routes/test.router.ts'
+import userRouter from "./routes/user.router.ts";
 
 // Extend IncomingMessage to include rawBody
 declare module "http" {
@@ -38,6 +39,7 @@ app.use("/api/clerk", clerkRouter);
 app.use(e.json());
 
 app.use('/api/test', testRouter);
+app.use('/api/user', userRouter);
 
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');

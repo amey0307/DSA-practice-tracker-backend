@@ -1,6 +1,6 @@
 import { Webhook } from "svix"
 import dotenv from 'dotenv'
-import pool from '../middleware/db_connection.middleware.js'
+import pool from '../middleware/db_connection.middleware.ts'
 
 dotenv.config()
 
@@ -51,11 +51,10 @@ export const webhook = async (req: any, res: any) => {
         console.log('user clerk id to save:' + evt.data.email_addresses[0].email_address);
 
         const email = evt.data.email_addresses[0].email_address
-        const name = evt.data.first_name + ' ' + evt.data.last_name
         const clerkId = evt.data.id
 
-        const query = 'INSERT INTO users (email, name, clerk_id) VALUES ($1, $2, $3, $4) RETURNING *'
-        const values = [email, name, clerkId]
+        const query = 'INSERT INTO "public"."Users" (email, username, clerk_id) VALUES ($1, $2, $3) RETURNING *'
+        const values = [email, username, clerkId]
         try {
             const result = await pool.query(query, values)
             const user = result.rows[0]
@@ -77,7 +76,7 @@ export const webhook = async (req: any, res: any) => {
     if (eventType === 'user.deleted') {
         console.log('user clerk id to delete:' + id)
 
-        const query = 'DELETE FROM users WHERE clerk_id = $1'
+        const query = 'DELETE FROM "public"."Users" WHERE clerk_id = $1'
         const values = [id]
         try {
             const result = await pool.query(query, values)
