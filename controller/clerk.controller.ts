@@ -35,7 +35,7 @@ export const webhook = async (req: any, res: any) => {
             'svix-timestamp': svix_timestamp,
             'svix-signature': svix_signature,
         })
-    } catch (err) {
+    } catch (err: any) {
         console.log('Error: Could not verify webhook:', err.message)
         return void res.status(400).json({
             success: false,
@@ -52,7 +52,7 @@ export const webhook = async (req: any, res: any) => {
             success: true,
             message: 'User created in DB',
         })
-        
+
     }
 
     if (eventType === 'user.deleted') {
