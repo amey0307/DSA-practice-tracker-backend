@@ -1,4 +1,4 @@
-import pool from "../middleware/db_connection.middleware.js";
+import pool from "../middleware/db_connection.middleware.ts";
 
 export const registerUser = async (req: any, res: any) => {
     const { email, username, clerk_id } = JSON.parse(req.body);

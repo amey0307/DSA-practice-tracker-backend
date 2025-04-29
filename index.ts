@@ -4,9 +4,9 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
 import dotenv from "dotenv";
-import clerkRouter from "./routes/clerk.router.js"
-import testRouter from './routes/test.router.js'
-import userRouter from "./routes/user.router.js";
+import clerkRouter from "./routes/clerk.router.ts"
+import testRouter from './routes/test.router.ts'
+import userRouter from "./routes/user.router.ts";
 
 // Extend IncomingMessage to include rawBody
 declare module "http" {
