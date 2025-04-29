@@ -1,6 +1,6 @@
 import { Webhook } from "svix"
 import dotenv from 'dotenv'
-import pool from '../middleware/db_connection.middleware.ts'
+import pool from '../middleware/db_connection.middleware.js'
 
 dotenv.config()
 
