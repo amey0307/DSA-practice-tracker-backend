@@ -1,5 +1,6 @@
 import { Webhook } from "svix"
 import dotenv from 'dotenv'
+import pool from '../middleware/db_connection.middleware.js'
 
 dotenv.config()
 
@@ -48,15 +49,55 @@ export const webhook = async (req: any, res: any) => {
 
     if (eventType === 'user.created') {
         console.log('user clerk id to save:' + evt.data.email_addresses[0].email_address);
+
+        const email = evt.data.email_addresses[0].email_address
+        const name = evt.data.first_name + ' ' + evt.data.last_name
+        const clerkId = evt.data.id
+
+        const query = 'INSERT INTO users (email, name, clerk_id) VALUES ($1, $2, $3, $4) RETURNING *'
+        const values = [email, name, clerkId]
+        try {
+            const result = await pool.query(query, values)
+            const user = result.rows[0]
+            console.log('User created in DB:', user)
+        }
+        catch (err) {
+            console.error('Error saving user to DB:', err)
+            return void res.status(500).json({
+                success: false,
+                message: 'Error saving user to DB',
+            })
+        }
         res.status(200).json({
             success: true,
             message: 'User created in DB',
         })
-
     }
 
     if (eventType === 'user.deleted') {
         console.log('user clerk id to delete:' + id)
+
+        const query = 'DELETE FROM users WHERE clerk_id = $1'
+        const values = [id]
+        try {
+            const result = await pool.query(query, values)
+            if (result.rowCount === 0) {
+                console.log('User not found in DB')
+                return void res.status(404).json({
+                    success: false,
+                    message: 'User not found in DB',
+                })
+            }
+            console.log('User deleted from DB:', id)
+        }
+        catch (err) {
+            console.error('Error deleting user from DB:', err)
+            return void res.status(500).json({
+                success: false,
+                message: 'Error deleting user from DB',
+            })
+        }
+
         res.status(200).json({
             success: true,
             message: 'User deleted in DB',
