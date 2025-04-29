@@ -4,7 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.ts --exec ts-node"
+    "dev": "nodemon index.ts --exec ts-node",
+    "build": "tsc",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
