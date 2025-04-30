@@ -1,6 +1,6 @@
 import { Webhook } from "svix"
 import dotenv from 'dotenv'
-import pool from '../middleware/db_connection.middleware.ts'
+import pool from '../middleware/db_connection.middleware.js'
 
 dotenv.config()
 
@@ -52,6 +52,7 @@ export const webhook = async (req: any, res: any) => {
 
         const email = evt.data.email_addresses[0].email_address
         const clerkId = evt.data.id
+        const username = email.split('@')[0]
 
         const query = 'INSERT INTO "public"."Users" (email, username, clerk_id) VALUES ($1, $2, $3) RETURNING *'
         const values = [email, username, clerkId]

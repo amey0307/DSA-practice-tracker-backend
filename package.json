@@ -4,9 +4,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.ts --exec ts-node",
+    "dev": "npm run build && nodemon dist/index.js",
     "build": "tsc",
-    "start": "node index.js"
+    "start": "nodemon dist/index.js",
+    "push": "rsync -avz --exclude 'node_modules' --exclude '.git' -e \"ssh -i ~/.ssh/dsa-tracker-server.pem\" . ubuntu@ec2-3-82-147-195.compute-1.amazonaws.com:~/app"
   },
   "dependencies": {
     "@clerk/clerk-sdk-node": "^4.13.23",

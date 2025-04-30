@@ -1,18 +1,22 @@
 {
     "compilerOptions": {
-        "noEmit": true,
-        "allowImportingTsExtensions": true,
-        "target": "ES2020",
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "outDir": "dist"
+        "target": "ES2020", // Target modern JavaScript
+        "module": "NodeNext", // Use Node.js ESM module resolution
+        "moduleResolution": "NodeNext", // Resolve modules in Node.js style
+        "strict": true, // Enable strict type-checking
+        "esModuleInterop": true, // Allow default imports from CommonJS modules
+        "skipLibCheck": true, // Skip type checking of declaration files
+        "outDir": "dist", // Output compiled files to the dist folder
+        "rootDir": ".", // Specify the root directory of input files
+        "resolveJsonModule": true // Allow importing JSON files
     },
     "include": [
         "index.ts",
         "routes/**/*.ts",
         "controller/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules", // Exclude dependencies
+        "dist" // Exclude the output folder
     ]
 }

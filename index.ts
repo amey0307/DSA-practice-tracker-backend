@@ -4,9 +4,9 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
 import dotenv from "dotenv";
-import clerkRouter from "./routes/clerk.router.ts"
-import testRouter from './routes/test.router.ts'
-import userRouter from "./routes/user.router.ts";
+import clerkRouter from "./routes/clerk.router.js"
+import testRouter from './routes/test.router.js'
+import userRouter from "./routes/user.router.js";
 
 // Extend IncomingMessage to include rawBody
 declare module "http" {
@@ -41,6 +41,9 @@ app.use(e.json());
 app.use('/api/test', testRouter);
 app.use('/api/user', userRouter);
 
-app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
+const url = process.env.URL || 'localhost'; //IP address of the server
+
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on http://${url}:3000`);
+    console.log(`For API testing : http://${url}:3000/api/test`);
 });
