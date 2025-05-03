@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 import clerkRouter from "./routes/clerk.router.js"
 import testRouter from './routes/test.router.js'
 import userRouter from "./routes/user.router.js";
+import questionRouter from "./routes/question.router.js"
 
 // Extend IncomingMessage to include rawBody
 declare module "http" {
@@ -40,10 +41,14 @@ app.use(e.json());
 
 app.use('/api/test', testRouter);
 app.use('/api/user', userRouter);
+app.use('/api/questions', questionRouter);
 
-const url = process.env.URL || 'localhost'; //IP address of the server
+const ip = process.env.IP || 'localhost';
+const port = process.env.PORT || 3000;
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running on http://${url}:3000`);
-    console.log(`For API testing : http://${url}:3000/api/test`);
+app.listen(port, () => {
+    console.log('-'.repeat(50));
+    console.log(`Server is running on http://${ip}:${port}`);
+    console.log('-'.repeat(50));
+    console.log(`Test Server on http://${ip}:${port}/api/test`);
 });

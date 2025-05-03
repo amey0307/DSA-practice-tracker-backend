@@ -7,13 +7,11 @@
         "esModuleInterop": true, // Allow default imports from CommonJS modules
         "skipLibCheck": true, // Skip type checking of declaration files
         "outDir": "dist", // Output compiled files to the dist folder
-        "rootDir": ".", // Specify the root directory of input files
+        "rootDir": "src", // Specify the root directory of input files
         "resolveJsonModule": true // Allow importing JSON files
     },
     "include": [
-        "index.ts",
-        "routes/**/*.ts",
-        "controller/**/*.ts"
+        "src/**/*.ts", // Include all TypeScript files in the src folder
     ],
     "exclude": [
         "node_modules", // Exclude dependencies
