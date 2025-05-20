@@ -22,8 +22,13 @@ const app = e();
 app.use(clerkMiddleware()); // Clerk middleware
 app.use(
     cors({
-        origin: "http://localhost:5173", // Replace with your frontend URL
-        credentials: true, // Allow cookies
+        origin: [
+            "https://dsa-practice-tracker.vercel.app",
+            "http://localhost:5173",
+            `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`,
+        ],
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     }),
 );
 app.use(cookieParser());

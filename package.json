@@ -9,7 +9,7 @@
     "dev": "npm run build && npm run start",
     "watch": "chokidar 'src/**/*.ts' -c 'npm run build && nodemon dist/index.js'",
     "oldDev": "nodemon --exec ts-node index.ts",
-    "push": "rsync -avz --exclude 'node_modules' --exclude '.git' --exclude 'vercel.json' -e \"ssh -i ~/.ssh/dsa-tracker-server.pem\" . ubuntu@ec2-3-82-147-195.compute-1.amazonaws.com:~/server"
+    "push": "rsync -avz --exclude 'node_modules' --exclude '.git' --exclude 'vercel.json' -e \"ssh -i ~/.ssh/dsa-tracker-server.pem\" . ubuntu@ec2-44-204-173-173.compute-1.amazonaws.com:~/server"
   },
   "dependencies": {
     "@clerk/clerk-sdk-node": "^4.13.23",
